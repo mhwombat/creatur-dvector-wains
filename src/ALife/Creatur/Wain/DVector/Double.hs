@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.Double
--- Copyright   :  (c) Amy de Buitléir 2017
+-- Copyright   :  (c) Amy de Buitléir 2017-2018
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -14,11 +14,12 @@ module ALife.Creatur.Wain.DVector.Double
   (
     sanitise,
     diff,
-    makeSimilar
+    makeSimilar,
+    maxDouble,
+    minDouble
   ) where
 
-import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble,
-  doubleToUI)
+import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble)
 import Data.Datamining.Pattern (adjustNum)
 
 -- | @'makeSimilar' target amount x@ adjusts @x@ to move it closer to
@@ -34,8 +35,8 @@ makeSimilar target r x = adjustNum target (uiToDouble r) x
 -- | Returns a number between 0 and 1 which indicates how different
 --   the two inputs are. A result of 0 indicates that the
 --   inputs are identical.
-diff :: Double -> Double -> UIDouble
-diff x y = doubleToUI ((abs (x/2 - y/2)) / (halfMaxDiff))
+diff :: Double -> Double -> Double
+diff x y = ((abs (x/2 - y/2)) / (halfMaxDiff))
   -- divide by two so we don't overflow or underflow
 
 halfMaxDiff :: Double

@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.Wain
--- Copyright   :  (c) Amy de Buitléir 2017
+-- Copyright   :  (c) Amy de Buitléir 2017-2018
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -14,8 +14,6 @@
 module ALife.Creatur.Wain.DVector.Wain
   (
     PatternWain,
-    describeClassifierModels,
-    describePredictorModels,
     adjustEnergy,
     metabCost,
     packageVersion
@@ -23,15 +21,13 @@ module ALife.Creatur.Wain.DVector.Wain
 
 import ALife.Creatur (agentId)
 import qualified ALife.Creatur.Wain as W
-import ALife.Creatur.Wain.Brain (classifier, predictor)
-import ALife.Creatur.Wain.GeneticSOM (modelMap, numModels)
+import ALife.Creatur.Wain.Brain (classifier)
+import ALife.Creatur.Wain.GeneticSOM (numModels)
 import ALife.Creatur.Wain.DVector.Pattern (Pattern)
-import ALife.Creatur.Wain.Pretty (pretty)
 import ALife.Creatur.Wain.DVector.Tweaker (PatternTweaker(..))
 import ALife.Creatur.Wain.UnitInterval (uiToDouble)
 import Control.Lens hiding (universe)
 import Control.Monad.State.Lazy (StateT)
-import qualified Data.Map.Strict as M
 import Data.Version (showVersion)
 import Paths_creatur_dvector_wains (version)
 import Text.Printf (printf)
@@ -41,18 +37,6 @@ packageVersion :: String
 packageVersion = "creatur-dvector-vector-wains-" ++ showVersion version
 
 type PatternWain a rt m = W.Wain Pattern PatternTweaker rt m a
-
-describeClassifierModels :: PatternWain a rt m -> [String]
-describeClassifierModels w = map f ms
-  where ms = M.toList . modelMap . view (W.brain . classifier) $ w
-        f (l, r) = agentId w ++ "'s classifier model "
-                     ++ show l ++ " " ++ show r
-
-describePredictorModels :: Show a => PatternWain a rt m -> [String]
-describePredictorModels w = map f ms
-  where ms = M.toList . modelMap . view (W.brain . predictor) $ w
-        f (l, r) = agentId w ++ "'s predictor model "
-                     ++ show l ++ ": " ++ pretty r
 
 adjustEnergy
   :: Simple Lens e (PatternWain a rt m) -> Double

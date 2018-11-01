@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.DoubleQC
--- Copyright   :  (c) Amy de Buitléir 2017
+-- Copyright   :  (c) Amy de Buitléir 2017-2018
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -46,7 +46,7 @@ prop_full_adjustment_gives_perfect_match a b = property $ diff b' a < aTad
   where b' = makeSimilar a 1 b
         aTad = 1e-10
 
-prop_makeSimilar_improves_similarity :: 
+prop_makeSimilar_improves_similarity ::
   Double -> Double -> UIDouble -> Property
 prop_makeSimilar_improves_similarity a b r
   = a /= b ==> d2 < d1

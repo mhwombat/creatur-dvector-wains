@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.Pattern
--- Copyright   :  (c) Amy de Buitléir 2017
+-- Copyright   :  (c) Amy de Buitléir 2017-2018
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -10,6 +10,9 @@
 -- Utilities for working with patterns.
 --
 ------------------------------------------------------------------------
+{-# LANGUAGE FlexibleInstances #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 module ALife.Creatur.Wain.DVector.Pattern
   (
     Pattern,
@@ -19,6 +22,7 @@ module ALife.Creatur.Wain.DVector.Pattern
   ) where
 
 import qualified ALife.Creatur.Wain.DVector.Double as D
+import  ALife.Creatur.Wain.Statistics (Statistical(..), dStats)
 import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble,
   doubleToUI, interval)
 import ALife.Creatur.Wain.Util (inRange)
@@ -29,6 +33,9 @@ type Pattern = [Double]
 
 makeSimilar :: Pattern -> UIDouble -> Pattern -> Pattern
 makeSimilar t a v = adjustVector t (uiToDouble a) v
+
+instance Statistical Pattern where
+  stats = dStats ""
 
 -- | Returns a number between 0 and 1 which indicates how different
 --   the two input vectors are.  A result of 0 indicates that the
@@ -43,7 +50,7 @@ vectorDiff xs ys
                                ++ " ys=" ++ show ys
   where x = d / fromIntegral (length deltas)
         deltas = zipWith D.diff xs ys
-        d = sum $ map uiToDouble deltas
+        d = sum deltas
 
 -- | Calculates the weighted difference between two sequences of
 --   numbers.
@@ -52,4 +59,5 @@ vectorDiff xs ys
 weightedDVectorDiff
   :: Weights -> [Double] -> [Double] -> UIDouble
 weightedDVectorDiff ws xs ys
-  = sum . zipWith (*) (toUIDoubles ws) $ zipWith D.diff xs ys
+  = doubleToUI . sum . zipWith (*) ws' $ zipWith D.diff xs ys
+  where ws' = map uiToDouble $ toUIDoubles ws
