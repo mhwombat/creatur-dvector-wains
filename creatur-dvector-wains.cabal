@@ -1,17 +1,11 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
---
--- see: https://github.com/sol/hpack
---
--- hash: 77de60f30a591ee83685cc615eca88c95548854beb4430f6e6b63826ac074f6b
-
 name:           creatur-dvector-wains
-version:        1.1.1
+version:        1.1.2
 description:    Please see the README on GitHub at <https://github.com/githubuser/creatur-dvector-wains#readme>
 homepage:       https://github.com/mhwombat/creatur-dvector-wains#readme
 bug-reports:    https://github.com/mhwombat/creatur-dvector-wains/issues
 author:         Amy de Buitléir
 maintainer:     amy@nualeargais.ie
-copyright:      2018 Amy de Buitléir
+copyright:      2018-2019 Amy de Buitléir
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -39,17 +33,17 @@ library
       src
   ghc-options: -Wall -Werror
   build-depends:
-      MonadRandom
+      MonadRandom >= 0.5.1 && < 0.6
     , base >=4.7 && <5
-    , cereal
-    , containers
-    , creatur
-    , creatur-wains
-    , gray-extended
-    , lens
-    , mtl
-    , som
-    , split
+    , cereal >= 0.5.7 && < 0.6
+    , containers >= 0.5.7 && < 0.6
+    , creatur >= 5.9.27 && < 5.10
+    , creatur-wains ==9.5.*
+    , gray-extended >= 1.5.4 && < 1.6
+    , lens >= 4.16 && < 4.17
+    , mtl >= 2.2.2 && < 2.3
+    , som >= 10.1.7 && < 10.2
+    , split >= 0.2.3 && < 0.3
   default-language: Haskell2010
 
 test-suite creatur-dvector-wains-test
