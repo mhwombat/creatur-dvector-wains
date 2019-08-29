@@ -1,5 +1,8 @@
 # Changelog for creatur-dvector-wains
 
+1.1.3 Revamped to use creatur-wains 9.5.5 (which uses SGM4).
+      Extended version constrains for lens, containers.
+
 1.1.2 Revamped to build using NixOS + cabal-install.
 
 1.1.1 Upgraded to new version of creatur-wains.

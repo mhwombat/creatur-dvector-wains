@@ -19,22 +19,22 @@ module ALife.Creatur.Wain.DVector.Wain
     packageVersion
   ) where
 
-import ALife.Creatur (agentId)
-import qualified ALife.Creatur.Wain as W
-import ALife.Creatur.Wain.Brain (classifier)
-import ALife.Creatur.Wain.GeneticSOM (numModels)
-import ALife.Creatur.Wain.DVector.Pattern (Pattern)
-import ALife.Creatur.Wain.DVector.Tweaker (PatternTweaker(..))
-import ALife.Creatur.Wain.UnitInterval (uiToDouble)
-import Control.Lens hiding (universe)
-import Control.Monad.State.Lazy (StateT)
-import Data.Version (showVersion)
-import Paths_creatur_dvector_wains (version)
-import Text.Printf (printf)
+import           ALife.Creatur                      (agentId)
+import qualified ALife.Creatur.Wain                 as W
+import           ALife.Creatur.Wain.Brain           (classifier)
+import           ALife.Creatur.Wain.DVector.Pattern (Pattern)
+import           ALife.Creatur.Wain.DVector.Tweaker (PatternTweaker (..))
+import           ALife.Creatur.Wain.GeneticSOM      (numModels)
+import           ALife.Creatur.Wain.UnitInterval    (uiToDouble)
+import           Control.Lens                       hiding (universe)
+import           Control.Monad.State.Lazy           (StateT)
+import           Data.Version                       (showVersion)
+import           Paths_creatur_dvector_wains        (version)
+import           Text.Printf                        (printf)
 
 -- | Returns the current version number of this library.
 packageVersion :: String
-packageVersion = "creatur-dvector-vector-wains-" ++ showVersion version
+packageVersion = "creatur-dvector-wains-" ++ showVersion version
 
 type PatternWain a rt m = W.Wain Pattern PatternTweaker rt m a
 
