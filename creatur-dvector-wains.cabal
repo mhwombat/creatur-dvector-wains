@@ -38,7 +38,7 @@ library
     , cereal >= 0.5.7 && < 0.6
     , containers >= 0.5.7 && < 0.7
     , creatur >= 5.9.27 && < 5.10
-    , creatur-wains >=9.5.5 && < 9.7
+    , creatur-wains >=9.5.5 && < 9.8
     , gray-extended >= 1.5.4 && < 1.6
     , lens >= 4.16 && < 4.18
     , mtl >= 2.2.2 && < 2.3
