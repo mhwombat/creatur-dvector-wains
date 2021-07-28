@@ -44,7 +44,7 @@ library
     , creatur        ^>=5.9.30
     , creatur-wains  >=9.5.5  && <9.8
     , gray-extended  ^>=1.5.9
-    , lens           ^>=5.1
+    , lens           >= 4.19.2 && < 4.20
     , MonadRandom    ^>=0.5.1
     , mtl            ^>=2.2.2
     , som            ^>=10.1.11
