@@ -1,6 +1,6 @@
-let 
+let
   pkgs = import <nixpkgs> { };
-in 
+in
   pkgs.haskellPackages.developPackage {
     root = ./.;
     source-overrides = {
@@ -8,5 +8,7 @@ in
       creatur = ../creatur;
       creatur-wains = ../creatur-wains;
       creatur-wains-test-utils = ../creatur-wains-test-utils;
+      gray-extended = ../gray-extended;
+      grid = ../grid;
     };
   }
