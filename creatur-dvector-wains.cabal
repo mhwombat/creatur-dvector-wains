@@ -36,7 +36,7 @@ library
     ALife.Creatur.Wain.DVector.Wain
   other-modules:   Paths_creatur_dvector_wains
   autogen-modules: Paths_creatur_dvector_wains
-  ghc-options:     -Wall -Wunused-packages
+  ghc-options:     -Wall -Wunused-packages -Werror
   build-depends:
     , base           >=4.7    && <5
     , cereal         ^>=0.5.7
@@ -58,7 +58,7 @@ test-suite creatur-dvector-wains-test
     ALife.Creatur.Wain.DVector.DoubleQC
     ALife.Creatur.Wain.DVector.PatternQC
   ghc-options:
-    -threaded -rtsopts -with-rtsopts=-N -Wall -Wunused-packages
+    -threaded -rtsopts -with-rtsopts=-N -Wall -Wunused-packages -Werror
   build-depends:
     , base
     , creatur-dvector-wains
