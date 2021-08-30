@@ -24,7 +24,7 @@ import ALife.Creatur.Wain.GeneticSOM (Tweaker(..))
 import qualified ALife.Creatur.Wain.DVector.Pattern as P
 import  ALife.Creatur.Wain.Pretty (Pretty)
 import  ALife.Creatur.Wain.Statistics (Statistical(..), prefix)
-import ALife.Creatur.Wain.Weights (Weights)
+import ALife.Creatur.Gene.Numeric.Weights (Weights)
 
 import Data.Serialize (Serialize)
 import GHC.Generics (Generic)

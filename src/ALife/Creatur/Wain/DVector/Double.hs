@@ -19,7 +19,7 @@ module ALife.Creatur.Wain.DVector.Double
     minDouble
   ) where
 
-import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble)
+import ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble, uiToDouble)
 import Data.Datamining.Pattern (adjustNum)
 
 -- | @'makeSimilar' target amount x@ adjusts @x@ to move it closer to

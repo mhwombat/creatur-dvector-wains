@@ -34,7 +34,7 @@ import qualified ALife.Creatur.Wain.GeneticSOM as S
 import ALife.Creatur.Wain.Response (Response)
 import ALife.Creatur.Wain.DVector.Pattern (Pattern)
 import ALife.Creatur.Wain.DVector.Wain (PatternWain)
-import ALife.Creatur.Wain.UnitInterval (UIDouble)
+import ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble)
 import Control.Lens
 import GHC.Generics (Generic)
 import Data.Serialize

@@ -17,10 +17,9 @@ module ALife.Creatur.Wain.DVector.DoubleQC
     test
   ) where
 
+import qualified ALife.Creatur.Gene.Test as GT
 import ALife.Creatur.Wain.DVector.Double
-import ALife.Creatur.Wain.UnitInterval (UIDouble)
-import ALife.Creatur.Wain.TestUtils (prop_serialize_round_trippable,
-  prop_genetic_round_trippable, prop_diploid_identity)
+import ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble)
 import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.QuickCheck2 (testProperty)
 import Test.QuickCheck
@@ -58,11 +57,11 @@ test :: Test
 test = testGroup "ALife.Creatur.Wain.DVector.DoubleQC"
   [
     testProperty "prop_serialize_round_trippable - Double"
-      (prop_serialize_round_trippable :: Double -> Property),
+      (GT.prop_serialize_round_trippable :: Double -> Property),
     testProperty "prop_genetic_round_trippable - Double"
-      (prop_genetic_round_trippable (==) :: Double -> Property),
+      (GT.prop_genetic_round_trippable (==) :: Double -> Property),
     testProperty "prop_diploid_identity - Double"
-      (prop_diploid_identity (==) :: Double -> Property),
+      (GT.prop_diploid_identity (==) :: Double -> Property),
     testProperty "prop_diff_can_be_0"
       prop_diff_can_be_0,
     testProperty "prop_diff_btw_0_and_1"

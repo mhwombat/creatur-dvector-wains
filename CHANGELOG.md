@@ -1,5 +1,8 @@
 # Changelog for creatur-dvector-wains
 
+1.1.4 Use new version of creatur-wains.
+      Migrate from creatur-wains-test-utils to creatur-genes.
+
 1.1.3 Revamped to use creatur-wains 9.5.5 (which uses SGM4).
       Extended version constrains for lens, containers.
 

@@ -23,10 +23,10 @@ module ALife.Creatur.Wain.DVector.Pattern
 
 import qualified ALife.Creatur.Wain.DVector.Double as D
 import  ALife.Creatur.Wain.Statistics (Statistical(..), dStats)
-import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble,
+import ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble, uiToDouble,
   doubleToUI, interval)
-import ALife.Creatur.Wain.Util (inRange)
-import ALife.Creatur.Wain.Weights (Weights, toUIDoubles)
+import ALife.Creatur.Gene.Numeric.Util (inRange)
+import ALife.Creatur.Gene.Numeric.Weights (Weights, toUIDoubles)
 import Data.Datamining.Pattern (adjustVector)
 
 type Pattern = [Double]

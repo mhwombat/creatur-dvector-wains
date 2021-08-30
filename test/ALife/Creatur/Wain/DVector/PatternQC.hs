@@ -18,12 +18,11 @@ module ALife.Creatur.Wain.DVector.PatternQC
     test
   ) where
 
-import ALife.Creatur.Wain.Weights (Weights, makeWeights)
+import qualified ALife.Creatur.Gene.Test as GT
+import ALife.Creatur.Gene.Numeric.Weights (Weights, makeWeights)
 import ALife.Creatur.Wain.DVector.Double (minDouble, maxDouble)
 import ALife.Creatur.Wain.DVector.Pattern
-import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble)
-import ALife.Creatur.Wain.TestUtils (prop_serialize_round_trippable,
-  prop_genetic_round_trippable, prop_diploid_identity)
+import ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble, uiToDouble)
 import qualified Numeric.ApproxEq as N
 import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.QuickCheck2 (testProperty)
@@ -108,11 +107,11 @@ test :: Test
 test = testGroup "ALife.Creatur.Wain.DVector.PatternQC"
   [
     testProperty "prop_serialize_round_trippable - Pattern"
-      (prop_serialize_round_trippable :: Pattern -> Property),
+      (GT.prop_serialize_round_trippable :: Pattern -> Property),
     testProperty "prop_genetic_round_trippable - Pattern"
-      (prop_genetic_round_trippable equiv :: Pattern -> Property),
+      (GT.prop_genetic_round_trippable equiv :: Pattern -> Property),
     testProperty "prop_diploid_identity - Pattern"
-      (prop_diploid_identity (==) :: Pattern -> Property),
+      (GT.prop_diploid_identity (==) :: Pattern -> Property),
     testProperty "prop_diff_can_be_0"
       prop_diff_can_be_0,
     testProperty "prop_diff_can_be_1"
