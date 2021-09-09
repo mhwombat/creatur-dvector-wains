@@ -52,11 +52,11 @@ initIfNeeded = do
 
 initialise :: PatternDB -> IO PatternDB
 initialise db = do
-  (_,xss) <- fmap fromCSV $ readFile (file db)
+  (_,xss) <- fromCSV <$> readFile (file db)
   return db { initialised=True, records = xss }
 
 fromCSV :: String -> ([String], [(String, Pattern)])
-fromCSV xss = extractValues . tokenise $ xss
+fromCSV = extractValues . tokenise
 
 -- toCSVLine :: Show a => (String,[a]) -> String
 -- toCSVLine (k,vs) = k ++ ',':(intercalate "," . map show $ vs)

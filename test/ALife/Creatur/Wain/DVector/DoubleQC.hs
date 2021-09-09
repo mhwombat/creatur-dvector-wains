@@ -10,7 +10,6 @@
 -- QuickCheck tests.
 --
 ------------------------------------------------------------------------
-{-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 module ALife.Creatur.Wain.DVector.DoubleQC
   (

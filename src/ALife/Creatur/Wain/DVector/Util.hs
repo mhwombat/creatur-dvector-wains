@@ -15,8 +15,7 @@ module ALife.Creatur.Wain.DVector.Util
     formatVector
   ) where
 
-import Data.List (intercalate)
 import Text.Printf (printf)
 
 formatVector :: String -> [Double] -> String
-formatVector fmt = intercalate " " . map (printf fmt)
+formatVector fmt = unwords . map (printf fmt)

@@ -11,7 +11,6 @@
 -- records.
 --
 ------------------------------------------------------------------------
-{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE Rank2Types #-}
 {-# LANGUAGE TypeFamilies #-}

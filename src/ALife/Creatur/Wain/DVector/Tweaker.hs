@@ -29,7 +29,7 @@ import ALife.Creatur.Gene.Numeric.Weights (Weights)
 import Data.Serialize (Serialize)
 import GHC.Generics (Generic)
 
-data PatternTweaker = PatternTweaker Weights
+newtype PatternTweaker = PatternTweaker Weights
   deriving (Eq, Show, Pretty, Generic)
 
 instance Tweaker PatternTweaker where

@@ -1,5 +1,7 @@
 # Changelog for creatur-dvector-wains
 
+1.1.5 De-linting.
+
 1.1.4 Use new version of creatur-wains.
       Migrate from creatur-wains-test-utils to creatur-genes.
 

@@ -12,7 +12,6 @@
 ------------------------------------------------------------------------
 {-# LANGUAGE FlexibleInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
-{-# LANGUAGE TypeSynonymInstances #-}
 module ALife.Creatur.Wain.DVector.Pattern
   (
     Pattern,
@@ -32,7 +31,7 @@ import Data.Datamining.Pattern (adjustVector)
 type Pattern = [Double]
 
 makeSimilar :: Pattern -> UIDouble -> Pattern -> Pattern
-makeSimilar t a v = adjustVector t (uiToDouble a) v
+makeSimilar t a = adjustVector t (uiToDouble a)
 
 instance Statistical Pattern where
   stats = dStats ""

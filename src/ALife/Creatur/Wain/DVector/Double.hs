@@ -30,13 +30,13 @@ import Data.Datamining.Pattern (adjustNum)
 --   If @amount@=1, the result will be identical to the @target@.
 --   If @amount@=0, the result will be the unmodified @pattern@.
 makeSimilar :: Double -> UIDouble -> Double -> Double
-makeSimilar target r x = adjustNum target (uiToDouble r) x
+makeSimilar target r = adjustNum target (uiToDouble r)
 
 -- | Returns a number between 0 and 1 which indicates how different
 --   the two inputs are. A result of 0 indicates that the
 --   inputs are identical.
 diff :: Double -> Double -> Double
-diff x y = ((abs (x/2 - y/2)) / (halfMaxDiff))
+diff x y = abs (x/2 - y/2) / halfMaxDiff
   -- divide by two so we don't overflow or underflow
 
 halfMaxDiff :: Double
