@@ -12,16 +12,14 @@
 ------------------------------------------------------------------------
 module Main where
 
-import ALife.Creatur.Wain.DVector.DoubleQC (test)
-import ALife.Creatur.Wain.DVector.PatternQC (test)
+import           ALife.Creatur.Wain.DVector.PatternQC (test)
 
-import Test.Framework as TF (defaultMain, Test)
+import           Test.Framework                       as TF (Test, defaultMain)
 
 tests :: [TF.Test]
-tests = 
+tests =
   [
     -- In increasing order of complexity
-    ALife.Creatur.Wain.DVector.DoubleQC.test,
     ALife.Creatur.Wain.DVector.PatternQC.test
   ]
 

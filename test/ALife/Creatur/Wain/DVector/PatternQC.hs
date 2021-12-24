@@ -17,17 +17,17 @@ module ALife.Creatur.Wain.DVector.PatternQC
     test
   ) where
 
-import qualified ALife.Creatur.Gene.Test as GT
-import ALife.Creatur.Gene.Numeric.Weights (Weights, makeWeights)
-import ALife.Creatur.Wain.DVector.Double (minDouble, maxDouble)
-import ALife.Creatur.Wain.DVector.Pattern
-import ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble, uiToDouble)
-import qualified Numeric.ApproxEq as N
-import Test.Framework (Test, testGroup)
-import Test.Framework.Providers.QuickCheck2 (testProperty)
-import Test.QuickCheck
+import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
+import           ALife.Creatur.Gene.Numeric.Weights      (Weights, makeWeights)
+import qualified ALife.Creatur.Gene.Test                 as GT
+import           ALife.Creatur.Wain.DVector.Pattern
+import           Data.Datamining.Pattern.Numeric         (maxDouble, minDouble)
+import qualified Numeric.ApproxEq                        as Q
+import           Test.Framework                          (Test, testGroup)
+import           Test.Framework.Providers.QuickCheck2    (testProperty)
+import           Test.QuickCheck
 
--- instance Arbitrary UIDouble where
+-- instance Arbitrary UI.UIDouble where
 --   arbitrary = doubleToUI <$> choose unitInterval
 
 sizedArbPattern :: Int -> Gen Pattern
@@ -36,8 +36,8 @@ sizedArbPattern n = vectorOf n arbitrary
 -- instance Arbitrary Pattern where
 --   arbitrary = sized sizedArbPattern
 
-prop_diff_can_be_0 :: Weights -> Pattern -> Property
-prop_diff_can_be_0 ws xs = property $ weightedDVectorDiff ws xs xs == 0
+prop_diff_can_be_0 :: Weights -> Pattern -> Bool
+prop_diff_can_be_0 ws xs = weightedDiff ws xs xs == 0
 
 data MaxDiffTestData = MaxDiffTestData Weights Pattern Pattern
   deriving Show
@@ -53,18 +53,17 @@ sizedArbMaxDiffTestData n = do
 instance Arbitrary MaxDiffTestData where
   arbitrary = sized sizedArbMaxDiffTestData
 
-prop_diff_can_be_1 :: MaxDiffTestData -> Property
-prop_diff_can_be_1 (MaxDiffTestData ws xs ys)
-  = property $ N.within 20 d 1
-  where d = uiToDouble $ weightedDVectorDiff ws xs ys
+prop_diff_can_be_1 :: MaxDiffTestData -> Bool
+prop_diff_can_be_1 (MaxDiffTestData ws xs ys) = Q.within 20 d 1
+  where d = UI.wide $ weightedDiff ws xs ys
 
-prop_diff_btw_0_and_1 :: Weights -> Pattern -> Pattern -> Property
-prop_diff_btw_0_and_1 ws xs ys = property $ 0 <= z && z <= 1
-  where z = weightedDVectorDiff ws xs ys
+prop_diff_btw_0_and_1 :: Weights -> Pattern -> Pattern -> Bool
+prop_diff_btw_0_and_1 ws xs ys = 0 <= z && z <= 1
+  where z = weightedDiff ws xs ys
 
-prop_diff_symmetric :: Weights -> Pattern -> Pattern -> Property
-prop_diff_symmetric ws xs ys = property $
-  weightedDVectorDiff ws xs ys == weightedDVectorDiff ws ys xs
+prop_diff_symmetric :: Weights -> Pattern -> Pattern -> Bool
+prop_diff_symmetric ws xs ys
+  = weightedDiff ws xs ys == weightedDiff ws ys xs
 
 data TwoPatternsSameLength = TwoPatternsSameLength Pattern Pattern
   deriving Show
@@ -77,40 +76,40 @@ instance Arbitrary TwoPatternsSameLength where
   arbitrary = sized sizedTwoPatternsSameLength
 
 prop_zero_adjustment_is_no_adjustment ::
-  Weights -> TwoPatternsSameLength -> Property
+  Weights -> TwoPatternsSameLength -> Bool
 prop_zero_adjustment_is_no_adjustment ws (TwoPatternsSameLength a b) =
-  property $ weightedDVectorDiff ws b b' < aTad
+  weightedDiff ws b b' < aTad
   where b' = makeSimilar a 0 b
         aTad = 1e-10
 
 prop_full_adjustment_gives_perfect_match ::
-  Weights -> TwoPatternsSameLength -> Property
+  Weights -> TwoPatternsSameLength -> Bool
 prop_full_adjustment_gives_perfect_match
-  ws (TwoPatternsSameLength a b) = property $ weightedDVectorDiff ws b' a < aTad
+  ws (TwoPatternsSameLength a b) = weightedDiff ws b' a < aTad
   where b' = makeSimilar a 1 b
         aTad = 1e-10
 
 prop_makeSimilar_improves_similarity ::
-  Weights -> TwoPatternsSameLength -> UIDouble -> Property
+  Weights -> TwoPatternsSameLength -> UI.UIDouble -> Property
 prop_makeSimilar_improves_similarity ws (TwoPatternsSameLength a b) r
   = not (null a) && a /= b ==> d2 < d1
-      where d1 = weightedDVectorDiff ws a b
-            d2 = weightedDVectorDiff ws a b'
+      where d1 = weightedDiff ws a b
+            d2 = weightedDiff ws a b'
             b' = makeSimilar a r b
 
 equiv :: Pattern -> Pattern -> Bool
-equiv a b = vectorDiff a b <= aTad -- use unweighted diff
+equiv a b = diff a b <= aTad -- use unweighted diff
   where aTad = 0.00001
 
 test :: Test
 test = testGroup "ALife.Creatur.Wain.DVector.PatternQC"
   [
     testProperty "prop_serialize_round_trippable - Pattern"
-      (GT.prop_serialize_round_trippable :: Pattern -> Property),
+      (GT.prop_serialize_round_trippable :: Pattern -> Bool),
     testProperty "prop_genetic_round_trippable - Pattern"
-      (GT.prop_genetic_round_trippable equiv :: Pattern -> Property),
+      (GT.prop_genetic_round_trippable equiv :: Pattern -> Bool),
     testProperty "prop_diploid_identity - Pattern"
-      (GT.prop_diploid_identity (==) :: Pattern -> Property),
+      (GT.prop_diploid_identity (==) :: Pattern -> Bool),
     testProperty "prop_diff_can_be_0"
       prop_diff_can_be_0,
     testProperty "prop_diff_can_be_1"
