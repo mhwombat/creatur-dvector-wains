@@ -42,7 +42,7 @@ library
   build-depends:
     , cereal                >= 0.5.8 && < 0.6
     , creatur               >= 5.9.32 && < 5.10
-    , creatur-wains         >= 9.8.1 && < 9.9
+    , creatur-wains         >= 10.0.0 && < 10.1
     , lens                  >= 4.19.2 && < 6
     , MonadRandom           >= 0.5.3 && < 0.6
     , mtl                   >= 2.2.2 && < 2.3

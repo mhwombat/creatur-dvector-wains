@@ -17,6 +17,7 @@ module ALife.Creatur.Wain.DVector.PatternQC
     test
   ) where
 
+import qualified ALife.Creatur.Gene.AdjusterTest         as AT
 import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
 import           ALife.Creatur.Gene.Numeric.Weights      (Weights, makeWeights)
 import qualified ALife.Creatur.Gene.Test                 as GT
@@ -75,28 +76,6 @@ sizedTwoPatternsSameLength n =
 instance Arbitrary TwoPatternsSameLength where
   arbitrary = sized sizedTwoPatternsSameLength
 
-prop_zero_adjustment_is_no_adjustment ::
-  Weights -> TwoPatternsSameLength -> Bool
-prop_zero_adjustment_is_no_adjustment ws (TwoPatternsSameLength a b) =
-  weightedDiff ws b b' < aTad
-  where b' = makeSimilar a 0 b
-        aTad = 1e-10
-
-prop_full_adjustment_gives_perfect_match ::
-  Weights -> TwoPatternsSameLength -> Bool
-prop_full_adjustment_gives_perfect_match
-  ws (TwoPatternsSameLength a b) = weightedDiff ws b' a < aTad
-  where b' = makeSimilar a 1 b
-        aTad = 1e-10
-
-prop_makeSimilar_improves_similarity ::
-  Weights -> TwoPatternsSameLength -> UI.UIDouble -> Property
-prop_makeSimilar_improves_similarity ws (TwoPatternsSameLength a b) r
-  = not (null a) && a /= b ==> d2 < d1
-      where d1 = weightedDiff ws a b
-            d2 = weightedDiff ws a b'
-            b' = makeSimilar a r b
-
 equiv :: Pattern -> Pattern -> Bool
 equiv a b = diff a b <= aTad -- use unweighted diff
   where aTad = 0.00001
@@ -110,18 +89,23 @@ test = testGroup "ALife.Creatur.Wain.DVector.PatternQC"
       (GT.prop_genetic_round_trippable equiv :: Pattern -> Bool),
     testProperty "prop_diploid_identity - Pattern"
       (GT.prop_diploid_identity (==) :: Pattern -> Bool),
-    testProperty "prop_diff_can_be_0"
-      prop_diff_can_be_0,
-    testProperty "prop_diff_can_be_1"
-      prop_diff_can_be_1,
-    testProperty "prop_diff_btw_0_and_1"
-      prop_diff_btw_0_and_1,
-    testProperty "prop_diff_symmetric"
-      prop_diff_symmetric,
-    testProperty "prop_zero_adjustment_is_no_adjustment"
-      prop_zero_adjustment_is_no_adjustment,
-    testProperty "prop_full_adjustment_gives_perfect_match"
-      prop_full_adjustment_gives_perfect_match,
-    testProperty "prop_makeSimilar_improves_similarity"
-      prop_makeSimilar_improves_similarity
+    testProperty "prop_diploid_expressable - Pattern"
+      (GT.prop_diploid_expressable :: Pattern -> Pattern -> Bool),
+    testProperty "prop_diploid_readable - Pattern"
+      (GT.prop_diploid_readable :: Pattern -> Pattern -> Bool),
+    testProperty "prop_show_read_round_trippable - Pattern"
+      (GT.prop_show_read_round_trippable (==) :: Pattern -> Bool),
+
+    testProperty "prop_diff_can_be_0 - DVectorAdjuster"
+      (AT.prop_diff_can_be_0 :: DVectorAdjuster -> Pattern -> Bool),
+    testProperty "prop_diff_can_be_1 - DVectorAdjuster"
+      (AT.prop_diff_can_be_1 :: DVectorAdjuster -> Pattern -> Bool),
+    testProperty "prop_diff_is_symmetric - DVectorAdjuster"
+      (AT.prop_diff_is_symmetric :: DVectorAdjuster -> Pattern -> Pattern -> Bool),
+    testProperty "prop_makeSimilar_improves_similarity - DVectorAdjuster"
+      (AT.prop_makeSimilar_improves_similarity :: DVectorAdjuster -> Pattern -> UI.UIDouble -> Pattern -> Bool),
+    testProperty "prop_zero_adjustment_makes_no_change - DVectorAdjuster"
+      (AT.prop_zero_adjustment_makes_no_change (equiv) :: DVectorAdjuster -> Pattern -> Pattern -> Bool),
+    testProperty "prop_full_adjustment_gives_perfect_match - DVectorAdjuster"
+      (AT.prop_full_adjustment_gives_perfect_match (equiv) :: DVectorAdjuster -> Pattern -> Pattern -> Bool)
   ]
