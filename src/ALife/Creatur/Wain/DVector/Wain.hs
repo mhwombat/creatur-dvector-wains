@@ -10,7 +10,6 @@
 -- Utilities for working with wains.
 --
 ------------------------------------------------------------------------
-{-# LANGUAGE Rank2Types #-}
 module ALife.Creatur.Wain.DVector.Wain
   (
     PatternWain,
@@ -21,10 +20,8 @@ module ALife.Creatur.Wain.DVector.Wain
 
 import qualified ALife.Creatur.Wain                 as W
 import           ALife.Creatur.Wain.Brain           (classifier)
-import           ALife.Creatur.Wain.DVector.Pattern (Pattern)
-import           ALife.Creatur.Wain.DVector.Tweaker (PatternTweaker (..))
-import           ALife.Creatur.Wain.GeneticSOM      (numModels)
-import           Control.Lens                       hiding (universe)
+import           ALife.Creatur.Wain.DVector.Pattern (DVectorAdjuster, Pattern)
+import           Data.Datamining.Clustering.SGM4    (size)
 import           Data.Version                       (showVersion)
 import           Paths_creatur_dvector_wains        (version)
 
@@ -32,8 +29,8 @@ import           Paths_creatur_dvector_wains        (version)
 packageVersion :: String
 packageVersion = "creatur-dvector-wains-" ++ showVersion version
 
-type PatternWain a rt m = W.Wain Pattern PatternTweaker rt m a
+type PatternWain rt a m = W.Wain DVectorAdjuster rt Pattern a m
 
-metabCost :: Double -> Double -> Double -> PatternWain a rt m -> Double
+metabCost :: Double -> Double -> Double -> PatternWain rt a m -> Double
 metabCost bmc cpcm scale w = scale * (bmc + cpcm * fromIntegral n)
-  where n = numModels . view (W.brain . classifier) $ w
+  where n = size . classifier . W.brain $ w

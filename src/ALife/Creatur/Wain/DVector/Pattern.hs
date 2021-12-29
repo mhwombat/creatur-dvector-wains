@@ -17,7 +17,8 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 module ALife.Creatur.Wain.DVector.Pattern
   (
-    Pattern
+    Pattern,
+    DVectorAdjuster(..)
   ) where
 
 import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
@@ -34,6 +35,7 @@ import qualified Data.Datamining.Pattern.Numeric         as N
 import           Data.Serialize                          (Serialize)
 import           Data.Word                               (Word32)
 import           GHC.Generics                            (Generic)
+import           Test.QuickCheck                         (Arbitrary, arbitrary)
 
 type Pattern = [Double]
 
@@ -60,3 +62,6 @@ instance Report DVectorAdjuster where
   report (DVectorAdjuster l _) = report l
 
 -- TODO: Include weights in stats and reports
+
+instance Arbitrary DVectorAdjuster where
+  arbitrary = DVectorAdjuster <$> arbitrary <*> arbitrary
