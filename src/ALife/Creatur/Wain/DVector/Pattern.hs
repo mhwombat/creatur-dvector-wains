@@ -27,6 +27,7 @@ import qualified ALife.Creatur.Genetics.BRGCWord8        as G
 import           ALife.Creatur.Genetics.Diploid          (Diploid)
 import           ALife.Creatur.Wain.LearningParams       (LearningParams,
                                                           toLearningFunction)
+import           ALife.Creatur.Wain.Pretty               (Pretty (..))
 import           ALife.Creatur.Wain.Report               (Report, report)
 import           ALife.Creatur.Wain.Statistics           (Statistical (..))
 import qualified Data.Datamining.Clustering.SGM4         as SOM
@@ -43,7 +44,7 @@ type Pattern = [Double]
 --   stats = dStats ""
 
 data DVectorAdjuster = DVectorAdjuster LearningParams Weights
-  deriving (Eq, Show, Read, Generic, Serialize, G.Genetic, Diploid)
+  deriving (Eq, Show, Read, Pretty, Generic, Serialize, G.Genetic, Diploid)
 
 instance SOM.Adjuster DVectorAdjuster where
   type TimeType DVectorAdjuster = Word32
