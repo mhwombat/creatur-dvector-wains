@@ -48,13 +48,13 @@ data DVectorAdjuster = DVectorAdjuster LearningParams Weights
 
 instance SOM.Adjuster DVectorAdjuster where
   type TimeType DVectorAdjuster = Word32
-  type MetricType DVectorAdjuster = UI.UIDouble
+  type MetricType DVectorAdjuster = UI.Double
   type PatternType DVectorAdjuster = Pattern
   learningRate (DVectorAdjuster l _) = toLearningFunction l
-  difference (DVectorAdjuster _ ws) xs ys = UI.narrow $ L.weightedDiff ws' N.diff xs ys
+  difference (DVectorAdjuster _ ws) xs ys = UI.narrow $ L.weightedDiff ws' N.realFloatDiff xs ys
     where ws' = map UI.wide $ toUIDoubles ws
   makeSimilar _ target r x
-    =  L.makeSimilar N.makeSimilar target (UI.wide r) x
+    =  L.makeSimilar N.makeOrdFractionalSimilar target (UI.wide r) x
 
 instance Statistical DVectorAdjuster where
   stats (DVectorAdjuster l _) = stats l

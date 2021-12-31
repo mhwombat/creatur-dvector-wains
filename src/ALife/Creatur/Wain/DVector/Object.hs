@@ -28,7 +28,7 @@ module ALife.Creatur.Wain.DVector.Object
   ) where
 
 import           ALife.Creatur                           (agentId)
-import           ALife.Creatur.Gene.Numeric.UnitInterval (UIDouble)
+import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
 import qualified ALife.Creatur.Wain                      as W
 import           ALife.Creatur.Wain.DVector.Pattern      (Pattern)
 import           ALife.Creatur.Wain.DVector.Wain         (PatternWain)
@@ -58,7 +58,7 @@ objectAppearance :: Object rt a m -> Pattern
 objectAppearance (PObject img _) = img
 objectAppearance (AObject a)     = W.appearance a
 
-objectEnergy :: Object rt a m -> UIDouble
+objectEnergy :: Object rt a m -> UI.Double
 objectEnergy (PObject _ _) = 0
 objectEnergy (AObject a)   = W.energy a
 
