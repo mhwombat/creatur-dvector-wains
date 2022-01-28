@@ -23,8 +23,8 @@ source-repository head
 common common-stuff
   default-language: Haskell2010
   build-depends:
-    , base          >= 4.7 && < 5
-    , creatur-genes         >= 1.0.1 && < 1.1
+    , base                  >= 4.7 && < 5
+    , creatur-genes         >= 1.1.0 && < 1.2
     , QuickCheck            >= 2.14.2 && < 2.15
 
 library

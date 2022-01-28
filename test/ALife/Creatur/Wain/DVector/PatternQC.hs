@@ -63,7 +63,7 @@ instance Arbitrary TwoPatternsSameLength where
   arbitrary = sized sizedTwoPatternsSameLength
 
 equiv :: Pattern -> Pattern -> Bool
-equiv a b = L.diff N.realFloatDiff a b <= 1e-10
+equiv a b = L.diff N.doubleDiff a b <= 1e-10
   -- use unweighted diff here
 
 prop_makeSimilar_improves_similarity :: DVectorAdjuster -> TwoPatternsSameLength -> UI.Double -> Bool

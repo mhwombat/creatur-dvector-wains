@@ -22,7 +22,8 @@ module ALife.Creatur.Wain.DVector.Pattern
   ) where
 
 import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
-import           ALife.Creatur.Gene.Numeric.Weights      (Weights, toUIDoubles)
+import           ALife.Creatur.Gene.Numeric.Weights      (Weights,
+                                                          extractWeights)
 import qualified ALife.Creatur.Genetics.BRGCWord8        as G
 import           ALife.Creatur.Genetics.Diploid          (Diploid)
 import           ALife.Creatur.Wain.LearningParams       (LearningParams,
@@ -43,7 +44,7 @@ type Pattern = [Double]
 -- instance Statistical Pattern where
 --   stats = dStats ""
 
-data DVectorAdjuster = DVectorAdjuster LearningParams Weights
+data DVectorAdjuster = DVectorAdjuster LearningParams (Weights Double)
   deriving (Eq, Show, Read, Pretty, Generic, Serialize, G.Genetic, Diploid)
 
 instance SOM.Adjuster DVectorAdjuster where
@@ -51,8 +52,8 @@ instance SOM.Adjuster DVectorAdjuster where
   type MetricType DVectorAdjuster = UI.Double
   type PatternType DVectorAdjuster = Pattern
   learningRate (DVectorAdjuster l _) = toLearningFunction l
-  difference (DVectorAdjuster _ ws) xs ys = UI.narrow $ L.weightedDiff ws' N.realFloatDiff xs ys
-    where ws' = map UI.wide $ toUIDoubles ws
+  difference (DVectorAdjuster _ w) xs ys = UI.narrow $ L.weightedDiff ws N.doubleDiff xs ys
+    where ws = extractWeights w
   makeSimilar _ target r x
     =  L.makeSimilar N.makeOrdFractionalSimilar target (UI.wide r) x
 
