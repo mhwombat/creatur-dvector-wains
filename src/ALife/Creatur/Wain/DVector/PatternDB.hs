@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.PatternDB
--- Copyright   :  (c) 2017-2021 Amy de Buitléir
+-- Copyright   :  (c) 2017-2022 Amy de Buitléir
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -18,20 +18,20 @@ module ALife.Creatur.Wain.DVector.PatternDB
   ) where
 
 import ALife.Creatur.Wain.DVector.Pattern (Pattern)
-import Control.Monad (unless)
-import Control.Monad.IO.Class (liftIO)
-import Control.Monad.Random (evalRandIO, uniform)
-import Control.Monad.State (StateT, get, gets, put)
+import Control.Monad                      (unless)
+import Control.Monad.IO.Class             (liftIO)
+import Control.Monad.Random               (evalRandIO, uniform)
+import Control.Monad.State                (StateT, get, gets, put)
 -- import Data.List (intercalate)
-import Data.List.Split (splitOn)
-import Text.Read (readEither)
+import Data.List.Split                    (splitOn)
+import Text.Read                          (readEither)
 
 -- | A "flat file" database.
 data PatternDB = PatternDB
   {
     initialised :: Bool,
-    file :: FilePath,
-    records :: [(String, Pattern)]
+    file        :: FilePath,
+    records     :: [(String, Pattern)]
   } deriving (Eq)
 
 instance Show PatternDB where
@@ -74,7 +74,7 @@ extractValues xss =
 
 parseLine :: [String] -> (String, Pattern)
 parseLine (x:xs) = (x, map safeRead xs)
-parseLine [] = ("???",[])
+parseLine []     = ("???",[])
 
 safeRead :: Read a => String -> a
 safeRead s = case readEither s of

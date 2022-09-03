@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.Wain
--- Copyright   :  (c) 2017-2021 Amy de Buitléir
+-- Copyright   :  (c) 2017-2022 Amy de Buitléir
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -18,12 +18,12 @@ module ALife.Creatur.Wain.DVector.Wain
     packageVersion
   ) where
 
-import qualified ALife.Creatur.Wain                 as W
-import           ALife.Creatur.Wain.Brain           (classifier)
-import           ALife.Creatur.Wain.DVector.Pattern (DVectorAdjuster, Pattern)
-import           Data.Datamining.Clustering.SGM4    (size)
-import           Data.Version                       (showVersion)
-import           Paths_creatur_dvector_wains        (version)
+import ALife.Creatur.Wain                 qualified as W
+import ALife.Creatur.Wain.Brain           (classifier)
+import ALife.Creatur.Wain.DVector.Pattern (DVectorAdjuster, Pattern)
+import Data.Datamining.Clustering.SGM4    (size)
+import Data.Version                       (showVersion)
+import Paths_creatur_dvector_wains        (version)
 
 -- | Returns the current version number of this library.
 packageVersion :: String

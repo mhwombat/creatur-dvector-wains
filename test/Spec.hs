@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  Main
--- Copyright   :  (c) 2017-2021 Amy de Buitléir
+-- Copyright   :  (c) 2017-2022 Amy de Buitléir
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -12,9 +12,9 @@
 ------------------------------------------------------------------------
 module Main where
 
-import           ALife.Creatur.Wain.DVector.PatternQC (test)
+import ALife.Creatur.Wain.DVector.PatternQC (test)
 
-import           Test.Framework                       as TF (Test, defaultMain)
+import Test.Framework                       as TF (Test, defaultMain)
 
 tests :: [TF.Test]
 tests =

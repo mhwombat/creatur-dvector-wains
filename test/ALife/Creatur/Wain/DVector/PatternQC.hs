@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.PatternQC
--- Copyright   :  (c) 2017-2021 Amy de Buitléir
+-- Copyright   :  (c) 2017-2022 Amy de Buitléir
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -17,20 +17,19 @@ module ALife.Creatur.Wain.DVector.PatternQC
     test
   ) where
 
-import qualified ALife.Creatur.Gene.AdjusterTest         as AT
-import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
-import           ALife.Creatur.Gene.Numeric.Weights      (makeWeights)
-import qualified ALife.Creatur.Gene.Test                 as GT
-import           ALife.Creatur.Wain.DVector.Pattern      (DVectorAdjuster (..),
-                                                          Pattern)
-import qualified Data.Datamining.Clustering.SGM4         as SOM
-import qualified Data.Datamining.Pattern.List            as L
-import           Data.Datamining.Pattern.Numeric         (maxDouble, minDouble)
-import qualified Data.Datamining.Pattern.Numeric         as N
-import qualified Numeric.ApproxEq                        as Q
-import           Test.Framework                          (Test, testGroup)
-import           Test.Framework.Providers.QuickCheck2    (testProperty)
-import           Test.QuickCheck.Counterexamples
+import ALife.Creatur.Gene.AdjusterTest         qualified as AT
+import ALife.Creatur.Gene.Numeric.UnitInterval qualified as UI
+import ALife.Creatur.Gene.Numeric.Weights      (makeWeights)
+import ALife.Creatur.Gene.Test                 qualified as GT
+import ALife.Creatur.Wain.DVector.Pattern      (DVectorAdjuster (..), Pattern)
+import Data.Datamining.Clustering.SGM4         qualified as SOM
+import Data.Datamining.Pattern.List            qualified as L
+import Data.Datamining.Pattern.Numeric         (maxDouble, minDouble)
+import Data.Datamining.Pattern.Numeric         qualified as N
+import Numeric.ApproxEq                        qualified as Q
+import Test.Framework                          (Test, testGroup)
+import Test.Framework.Providers.QuickCheck2    (testProperty)
+import Test.QuickCheck.Counterexamples
 
 data MaxDiffTestData = MaxDiffTestData DVectorAdjuster Pattern Pattern
   deriving Show

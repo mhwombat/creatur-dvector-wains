@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.Pattern
--- Copyright   :  (c) 2017-2021 Amy de Buitléir
+-- Copyright   :  (c) 2017-2022 Amy de Buitléir
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -21,23 +21,22 @@ module ALife.Creatur.Wain.DVector.Pattern
     DVectorAdjuster(..)
   ) where
 
-import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
-import           ALife.Creatur.Gene.Numeric.Weights      (Weights,
-                                                          extractWeights)
-import qualified ALife.Creatur.Genetics.BRGCWord8        as G
-import           ALife.Creatur.Genetics.Diploid          (Diploid)
-import           ALife.Creatur.Wain.LearningParams       (LearningParams,
-                                                          toLearningFunction)
-import           ALife.Creatur.Wain.Pretty               (Pretty (..))
-import           ALife.Creatur.Wain.Report               (Report, report)
-import           ALife.Creatur.Wain.Statistics           (Statistical (..))
-import qualified Data.Datamining.Clustering.SGM4         as SOM
-import qualified Data.Datamining.Pattern.List            as L
-import qualified Data.Datamining.Pattern.Numeric         as N
-import           Data.Serialize                          (Serialize)
-import           Data.Word                               (Word32)
-import           GHC.Generics                            (Generic)
-import           Test.QuickCheck                         (Arbitrary, arbitrary)
+import ALife.Creatur.Gene.Numeric.UnitInterval qualified as UI
+import ALife.Creatur.Gene.Numeric.Weights      (Weights, extractWeights)
+import ALife.Creatur.Genetics.BRGCWord8        qualified as G
+import ALife.Creatur.Genetics.Diploid          (Diploid)
+import ALife.Creatur.Wain.LearningParams       (LearningParams,
+                                                toLearningFunction)
+import ALife.Creatur.Wain.Pretty               (Pretty (..))
+import ALife.Creatur.Wain.Report               (Report, report)
+import ALife.Creatur.Wain.Statistics           (Statistical (..))
+import Data.Datamining.Clustering.SGM4         qualified as SOM
+import Data.Datamining.Pattern.List            qualified as L
+import Data.Datamining.Pattern.Numeric         qualified as N
+import Data.Serialize                          (Serialize)
+import Data.Word                               (Word32)
+import GHC.Generics                            (Generic)
+import Test.QuickCheck                         (Arbitrary, arbitrary)
 
 type Pattern = [Double]
 

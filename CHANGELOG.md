@@ -1,5 +1,7 @@
 # Changelog for creatur-dvector-wains
 
+1.1.6 Reformatted source code.
+
 1.1.5 De-linting.
 
 1.1.4 Use new version of creatur-wains.

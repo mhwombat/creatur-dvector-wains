@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.DVector.Object
--- Copyright   :  (c) 2017-2021 Amy de Buitléir
+-- Copyright   :  (c) 2017-2022 Amy de Buitléir
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -27,13 +27,13 @@ module ALife.Creatur.Wain.DVector.Object
     objectToWain
   ) where
 
-import           ALife.Creatur                           (agentId)
-import qualified ALife.Creatur.Gene.Numeric.UnitInterval as UI
-import qualified ALife.Creatur.Wain                      as W
-import           ALife.Creatur.Wain.DVector.Pattern      (Pattern)
-import           ALife.Creatur.Wain.DVector.Wain         (PatternWain)
-import           Data.Serialize
-import           GHC.Generics                            (Generic)
+import ALife.Creatur                           (agentId)
+import ALife.Creatur.Gene.Numeric.UnitInterval qualified as UI
+import ALife.Creatur.Wain                      qualified as W
+import ALife.Creatur.Wain.DVector.Pattern      (Pattern)
+import ALife.Creatur.Wain.DVector.Wain         (PatternWain)
+import Data.Serialize
+import GHC.Generics                            (Generic)
 
 data Object rt a m = PObject Pattern String
               | AObject (PatternWain rt a m)

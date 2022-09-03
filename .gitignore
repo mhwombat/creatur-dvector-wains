@@ -2,6 +2,7 @@
 *.lock
 *~
 fixit.sh
+.envrc
 
 # nix
 result
